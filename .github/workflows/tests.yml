@@ -35,12 +35,15 @@ jobs:
         run: npm install
       - name: Run xctrace
         run: |
-          nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 1s --output /tmp/xctrace.trace > nohup.out 2>&1 &
+          nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 100s --output /tmp/xctrace.trace > nohup.out 2>&1 &
           sleep 30
           cat nohup.out
           ps aux
       - name: Run server
-        run: npm run test:server &
+        run: |
+          ps aux
+          cat nohup.out
+          npm run test:server &
       - name: Run e2e tests for firefox
         run: |
           ps aux

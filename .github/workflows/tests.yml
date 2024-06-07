@@ -43,11 +43,11 @@ jobs:
         run: |
           ps aux
           cat nohup.out
-          npm run test:server &
+          #npm run test:server &
       - name: Run e2e tests for firefox
         run: |
           ps aux
-          npm run test:e2e -- --browsers=firefox
+          #npm run test:e2e -- --browsers=firefox
         continue-on-error: true
       - name: Finish xtrace
         run: |

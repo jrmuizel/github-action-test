@@ -55,7 +55,10 @@ jobs:
           ps aux | grep xctrace
           killall -SIGINT xctrace
       - name: Sleep for 120 seconds
-        run: sleep 1
+        run: |
+          sleep 1
+          ps aux | grep xctrace
+          cat nohup.out
         shell: bash
       - name: Sleep for 120 seconds
         run: cat nohup.out

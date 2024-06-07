@@ -24,6 +24,7 @@ jobs:
         run: |
           nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 1000s --output /tmp/xctrace.trace > nohup.out 2>&1 &
           sleep 11
+          ls -l /tmp/xctrace.trace
           cat nohup.out
           ps aux | grep xctrace
       - name: Run server
@@ -43,7 +44,7 @@ jobs:
           killall -SIGINT xctrace
       - name: Sleep for 120 seconds
         run: |
-          sleep 1
+          while pgrep -x "xctrace" > /dev/null; do sleep 2; echo waiting for trace; done
           ps aux | grep xctrace
           cat nohup.out
         shell: bash

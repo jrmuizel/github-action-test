@@ -34,16 +34,18 @@ jobs:
       - name: NPM install
         run: npm install
       - name: Run xctrace
-        run: nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 1000s --output /tmp/xctrace.trace &
-        run: ps aux
+        run: |
+          nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 1000s --output /tmp/xctrace.trace &
+          ps aux
       - name: Run server
         run: npm run test:server &
       - name: Run e2e tests for firefox
         run: npm run test:e2e -- --browsers=firefox
         continue-on-error: true
       - name: Finish xtrace
-        run: ps aux
-        run: killall -SIGINT xctrace
+        run: |
+          ps aux
+          killall -SIGINT xctrace
       - name: Sleep for 120 seconds
         run: sleep 1
         shell: bash

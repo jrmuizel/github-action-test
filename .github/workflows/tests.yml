@@ -23,7 +23,7 @@ jobs:
       - name: Run xctrace
         run: |
           nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 1000s --output /tmp/xctrace.trace > nohup.out 2>&1 &
-          sleep 11
+          sleep 4
           ls -l /tmp/xctrace.trace
           cat nohup.out
           ps aux | grep xctrace
@@ -31,12 +31,12 @@ jobs:
         run: |
           ps aux | grep xctrace
           cat nohup.out
-          #npm run test:server &
+          npm run test:server &
       - name: Run e2e tests for firefox
         run: |
           #ps aux
           ps aux | grep xctrace
-          #npm run test:e2e -- --browsers=firefox
+          npm run test:e2e -- --browsers=firefox
         continue-on-error: true
       - name: Finish xtrace
         run: |

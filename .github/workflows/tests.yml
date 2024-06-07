@@ -23,7 +23,7 @@ jobs:
       - name: Run xctrace
         run: |
           nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 1000s --output /tmp/xctrace.trace > nohup.out 2>&1 &
-          sleep 10
+          sleep 11
           cat nohup.out
           ps aux | grep xctrace
       - name: Run server

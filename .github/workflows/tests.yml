@@ -42,6 +42,12 @@ jobs:
         continue-on-error: true
       - name: Finish xtrace
         run: killall -SIGINT xctrace
+      - name: Sleep for 120 seconds
+        run: sleep 1
+        shell: bash
+      - name: Sleep for 120 seconds
+        run: cat nohup.out
+        shell: bash
       - name: Upload profile artifact
         uses: actions/upload-artifact@v3
         with:

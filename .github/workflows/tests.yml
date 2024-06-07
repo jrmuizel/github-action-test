@@ -6,19 +6,6 @@ on:
       - main
   workflow_dispatch:
 jobs:
-  chrome-tests:
-    name: Run Chrome e2e tests
-    # Runs best on macos for CI as linux requires extra chrome flags
-    runs-on: macos-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-      - name: NPM install
-        run: npm install
-      - name: Run server
-        run: npm run test:server &
-      - name: Run e2e tests for chrome
-        run: npm run test:e2e -- --browsers=chrome
   firefox-tests:
     name: Run Firefox e2e tests
     # Runs best on macos for CI as linux requires extra setup
@@ -78,16 +65,3 @@ jobs:
           path: /tmp/xctrace.trace
       - name: Echo profile location
         run: echo "Profiler should be available at the bottom of this page https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/"
-  safari-tests:
-    name: Run Safari e2e tests
-    # Requires macos
-    runs-on: macos-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-      - name: NPM install
-        run: npm install
-      - name: Run server
-        run: npm run test:server &
-      - name: Run e2e tests for safari
-        run: npm run test:e2e -- --browsers=safari

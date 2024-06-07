@@ -38,20 +38,21 @@ jobs:
           nohup xctrace record --template 'Time Profiler' --all-processes --time-limit 100s --output /tmp/xctrace.trace > nohup.out 2>&1 &
           sleep 1
           cat nohup.out
-          ps aux
+          ps aux | grep xctrace
       - name: Run server
         run: |
-          ps aux
+          ps aux | grep xctrace
           cat nohup.out
           #npm run test:server &
       - name: Run e2e tests for firefox
         run: |
-          ps aux
+          #ps aux
+          ps aux | grep xctrace
           #npm run test:e2e -- --browsers=firefox
         continue-on-error: true
       - name: Finish xtrace
         run: |
-          ps aux
+          ps aux | grep xctrace
           killall -SIGINT xctrace
       - name: Sleep for 120 seconds
         run: sleep 1
